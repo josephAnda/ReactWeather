@@ -1,5 +1,65 @@
-ReactDOM.render(
-	<h1>Hello React!</h1>,
-	document.getElementById('app')
 
+
+var Greeter = React.createClass({
+	//  Allows you to specify default prop values
+	getDefaultProps: function() {
+		return {
+			name: 'React',
+			message:  "This is a message from within the 'p' tag of a component"
+		};
+
+	},
+	//  Tells the component to maintain state, that can be altered by the component itself (in practice,
+	//  components should not update their own props)
+	getInitialState: function() {
+		return {
+			name: this.props.name
+		};
+	},
+	onButtonClick: function(e) {
+		e.preventDefault();
+		//  this.refs uses 'ref' values that are passed to the elements of the form as attributes 
+		var nameRef = this.refs.name;
+		var name = nameRef.value;
+		nameRef.value = '';
+
+		if (typeof name=== 'string' && name.length >0) {
+			//  Allows you to alter component state internally 
+			this.setState({
+				name: name
+			});
+		}
+
+	},
+	render: function() {
+
+		var name = this.state.name;
+		var message = this.props.message;
+
+		return (
+			<div>
+				<h1>Hello {name}!</h1>
+				<p>{message}</p>
+
+				<form onSubmit={this.onButtonClick}>
+
+					<input type="text" ref="name" />  
+					<button>Set Name</button>
+				</form>
+			</div>
+
+		);
+
+	}
+
+})
+
+var firstName = "Joseph";
+
+var newMessage = "This is a message that can showcase what well-placed props can do."
+//  Access Greeter class using JSX
+ReactDOM.render(
+	<Greeter name={firstName} message={newMessage} />,
+	document.getElementById('app')
 );
+
