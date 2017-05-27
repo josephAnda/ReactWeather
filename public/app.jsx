@@ -1,5 +1,53 @@
 
 
+//  "Presentational Components" don't really render anything, they are 'dummy components'
+//  in that the user ineracts with them and they then run functions.  They are generally not responsible
+//  for maintaining state.  Container components encapsulate the presentational components and maintain state
+//  In short, UI components (that the user updates) should store their data in refs/props that are passed up to
+//  container components that can alter their internal state based on this information.  This is (again) the classic
+//  data handling design pattern for ReactJS
+
+var GreeterMessage = React.createClass({
+
+	render: function() {
+
+		var name = this.props.name;
+
+		return (
+			<div>
+				<h1>Hello {name}!</h1>
+				<p>This is a 'p' tag</p>
+			</div>
+		);
+	}
+});
+
+var GreeterForm = React.createClass({
+
+	onFormSubmit: function(e) {
+		e.preventDefault();
+
+		var name = this.refs.name.value;
+		
+		if (name.length >0) {
+			this.refs.name.value = '';
+			this.props.onNewName(name);
+		}
+
+	},
+
+	render: function() {
+		return (
+			<form onSubmit={this.onFormSubmit}>
+				<input type="text" ref="name" />  
+				<button>Set Name</button>
+			</form>
+		);
+	}
+	
+
+});
+
 var Greeter = React.createClass({
 	//  Allows you to specify default prop values
 	getDefaultProps: function() {
@@ -16,19 +64,11 @@ var Greeter = React.createClass({
 			name: this.props.name
 		};
 	},
-	onButtonClick: function(e) {
-		e.preventDefault();
-		//  this.refs uses 'ref' values that are passed to the elements of the form as attributes 
-		var nameRef = this.refs.name;
-		var name = nameRef.value;
-		nameRef.value = '';
-
-		if (typeof name=== 'string' && name.length >0) {
-			//  Allows you to alter component state internally 
-			this.setState({
-				name: name
-			});
-		}
+	handleNewName: function(name) {
+		
+		this.setState({
+			name: name,
+		});
 
 	},
 	render: function() {
@@ -38,14 +78,11 @@ var Greeter = React.createClass({
 
 		return (
 			<div>
-				<h1>Hello {name}!</h1>
-				<p>{message}</p>
+				
+				<GreeterMessage name={name} />
 
-				<form onSubmit={this.onButtonClick}>
 
-					<input type="text" ref="name" />  
-					<button>Set Name</button>
-				</form>
+				<GreeterForm onNewName={this.handleNewName} />
 			</div>
 
 		);
