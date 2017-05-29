@@ -23,22 +23,30 @@ var GreeterMessage = React.createClass({
 		);
 	}
 });
-
-//  Presentational Component:  
+ 
 var GreeterForm = React.createClass({
 
 	onFormSubmit: function(e) {
 		e.preventDefault();
-
+		
+		//  Capture values
 		var name = this.refs.name.value;
 		var message = this.refs.message.value;
-		
-		if (name.length >0 || message.length >0) {
-			this.refs.name.value = '';
-			this.refs.message.value = '';
-			this.props.onNewName(name, message);
-		}
 
+		//  Reset Form
+		this.refs.name.value = "";
+		this.refs.message.value = "";
+
+		var updates = {
+			name: name,
+			message: message
+		};
+
+		for (var key in updates) {
+			if(updates.hasOwnProperty(key)) {
+				this.props.onNewName(key, updates[key]);
+			}
+		}
 	},
 
 	render: function() {
@@ -50,8 +58,6 @@ var GreeterForm = React.createClass({
 			</form>
 		);
 	}
-	
-
 });
 
 //  Container component:  
@@ -73,17 +79,19 @@ var Greeter = React.createClass({
 			message: this.props.message
 		};
 	},
-	//  This function is activated by nested components to activate a change in state using setState(), which 
-	//  Will re-render the necessary compoenents.  This is the intended prupose of container components  
-	handleNewName: function(name, message) {
-		//  [  ]  Refactor so this argument deals with an object that is/has been selectively updated with the 
-		//  input refs that have changed, maintaining the state of any elements that have been fed blank information 
-		this.setState({
-			name: name,
-			message: message
-		});
 
+
+    //  The function below updates the view with any new non-null values inputted to the form 
+
+	handleNewInfo: function(property, value) {
+		if (value.length > 0) {
+
+			var update = {}; 
+			update[property] = value;
+			this.setState( update );
+		}
 	},
+
 	render: function() {
 
 		var name = this.state.name;
@@ -91,11 +99,9 @@ var Greeter = React.createClass({
 
 		return (
 			<div>
-				
 				<GreeterMessage name={name} message={message}/>
 
-
-				<GreeterForm onNewName={this.handleNewName} />
+				<GreeterForm onNewName={this.handleNewInfo} />
 			</div>
 
 		);
@@ -107,9 +113,7 @@ var Greeter = React.createClass({
 var firstName = "Joseph";
 
 var newMessage = "This is the most updated message"
-//  Access Greeter class using JSX
-//  Note that during the rendering of any component, you can set the state of the component by simply setting the value 
-//  equal to a JS expression within the braces.  
+
 ReactDOM.render(
 	<Greeter name={firstName} message={newMessage} />,
 	document.getElementById('app')
