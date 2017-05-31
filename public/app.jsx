@@ -7,6 +7,11 @@
 //  container components that can alter their internal state based on this information.  This is (again) the classic
 //  data handling design pattern for ReactJS
 
+//  Import React when its accessed via webpack as opposed to being
+//  made available globally via a script tag.  Require is via npm
+
+var React = require('react');
+var ReactDOM = require('react-dom');
 //  Presentational component: 
 var GreeterMessage = React.createClass({
 
@@ -82,6 +87,7 @@ var Greeter = React.createClass({
 
 
     //  The function below updates the view with any new non-null values inputted to the form 
+    //  This update keys are assumed to be valid state properties (if a given key isn't, this function won't do anything)
 
 	handleNewInfo: function(property, value) {
 		if (value.length > 0) {
