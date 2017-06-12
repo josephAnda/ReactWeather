@@ -1,5 +1,8 @@
 module.exports = {
 	entry: './app/app.jsx', //  Where webpack should start processing the code
+
+	entry: './public/app.jsx', //  Where webpack should start processing the code
+
 	output: {
 		path: __dirname,  //  Node.js syntax for path to current folder
 		filename: './public/bundle.js'
@@ -15,6 +18,13 @@ module.exports = {
 			WeatherMessage: 'app/components/WeatherMessage.jsx',
 			WeatherForm: 'app/components/WeatherForm',
 			openWeatherMap: 'app/api/openWeatherMap.jsx'
+
+	resolve: {
+		root: __dirname,
+		alias: {
+			Greeter: 'public/components/Greeter.jsx',
+			GreeterMessage: 'public/components/GreeterMessage.jsx',
+			GreeterForm: 'public/components/GreeterForm.jsx'
 		},
 		extensions: [ "", '.js', '.jsx']  //  This array tells webpack what extensions to process 
 	},

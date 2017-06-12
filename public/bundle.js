@@ -58,6 +58,7 @@
 
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(158);
+<<<<<<< HEAD
 
 	//  e.g. Creates the variable 'Route' and sets it equal to the Route property of whatever 
 	//  'require' returns.  
@@ -84,6 +85,14 @@
 			React.createElement(IndexRoute, { component: Weather })
 		)
 	), document.getElementById('app'));
+=======
+	var Greeter = __webpack_require__(159);
+
+	var firstName = "Joseph";
+	var newMessage = "This is the most updated message";
+
+	ReactDOM.render(React.createElement(Greeter, { name: firstName, message: newMessage }), document.getElementById('app'));
+>>>>>>> 9f8d1e94b6a09c0367a0d2bb996249d5d1e47d79
 
 /***/ },
 /* 1 */
@@ -19783,6 +19792,7 @@
 /* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 	/* components */
 	'use strict';
 
@@ -19919,11 +19929,69 @@
 	var _createMemoryHistory3 = _interopRequireDefault(_createMemoryHistory2);
 
 	exports.createMemoryHistory = _createMemoryHistory3['default'];
+=======
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var GreeterMessage = __webpack_require__(160);
+	var GreeterForm = __webpack_require__(161);
+
+	//  Container component:  
+	var Greeter = React.createClass({
+		displayName: 'Greeter',
+
+		//  Allows you to specify default prop values
+		getDefaultProps: function getDefaultProps() {
+			return {
+				name: 'React',
+				message: "This is a message from within the 'p' tag of a component"
+			};
+		},
+		//  Tells the component to maintain state, that can be altered by the component itself (in practice,
+		//  components should not update their own props)  Furthermore, props cannot be altered by functions after 
+		//  rendering.  State must handle the changes.  
+		getInitialState: function getInitialState() {
+			return {
+				name: this.props.name,
+				message: this.props.message
+			};
+		},
+
+		//  The function below updates the view with any new non-null values inputted to the form 
+		//  This update keys are assumed to be valid state properties (if a given key isn't, this function won't do anything)
+
+		handleNewInfo: function handleNewInfo(property, value) {
+			if (value.length > 0) {
+
+				var update = {};
+				update[property] = value;
+				this.setState(update);
+			}
+		},
+
+		render: function render() {
+
+			var name = this.state.name;
+			var message = this.state.message;
+
+			return React.createElement(
+				'div',
+				null,
+				React.createElement(GreeterMessage, { name: name, message: message }),
+				React.createElement(GreeterForm, { onNewName: this.handleNewInfo })
+			);
+		}
+
+	});
+
+	module.exports = Greeter;
+>>>>>>> 9f8d1e94b6a09c0367a0d2bb996249d5d1e47d79
 
 /***/ },
 /* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
 	exports.__esModule = true;
@@ -20135,11 +20203,47 @@
 	exports['default'] = Router;
 	module.exports = exports['default'];
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+=======
+	'use strict';
+
+	//  Presentational component: 
+	var React = __webpack_require__(1);
+
+	var GreeterMessage = React.createClass({
+		displayName: 'GreeterMessage',
+
+		render: function render() {
+			var name = this.props.name;
+			var message = this.props.message;
+
+			return React.createElement(
+				'div',
+				null,
+				React.createElement(
+					'h1',
+					null,
+					'Hello ',
+					name,
+					'!'
+				),
+				React.createElement(
+					'p',
+					null,
+					message
+				)
+			);
+		}
+	});
+
+	//  module.exports is the result of a require statement
+	module.exports = GreeterMessage;
+>>>>>>> 9f8d1e94b6a09c0367a0d2bb996249d5d1e47d79
 
 /***/ },
 /* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
 	exports.__esModule = true;
@@ -26666,6 +26770,58 @@
 	  };
 	};
 
+=======
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	var GreeterForm = React.createClass({
+		displayName: "GreeterForm",
+
+
+		onFormSubmit: function onFormSubmit(e) {
+			e.preventDefault();
+
+			//  Capture values
+			var name = this.refs.name.value;
+			var message = this.refs.message.value;
+
+			//  Reset Form
+			this.refs.name.value = "";
+			this.refs.message.value = "";
+
+			var updates = {
+				name: name,
+				message: message
+			};
+
+			for (var key in updates) {
+				if (updates.hasOwnProperty(key)) {
+					this.props.onNewName(key, updates[key]);
+				}
+			}
+		},
+
+		render: function render() {
+			return React.createElement(
+				"form",
+				{ onSubmit: this.onFormSubmit },
+				React.createElement("input", { type: "text", ref: "name", placeholder: "Enter name" }),
+				React.createElement("br", null),
+				React.createElement("textarea", { ref: "message", placeholder: "Enter message", rows: "4", cols: "50" }),
+				" ",
+				React.createElement("br", null),
+				React.createElement(
+					"button",
+					null,
+					"Submit"
+				)
+			);
+		}
+	});
+
+	module.exports = GreeterForm;
+>>>>>>> 9f8d1e94b6a09c0367a0d2bb996249d5d1e47d79
 
 /***/ }
 /******/ ]);
