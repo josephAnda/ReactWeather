@@ -1,7 +1,6 @@
 module.exports = {
 	entry: './app/app.jsx', //  Where webpack should start processing the code
 
-	entry: './public/app.jsx', //  Where webpack should start processing the code
 
 	output: {
 		path: __dirname,  //  Node.js syntax for path to current folder
@@ -17,11 +16,7 @@ module.exports = {
 			Examples: 'app/components/Examples.jsx',
 			WeatherMessage: 'app/components/WeatherMessage.jsx',
 			WeatherForm: 'app/components/WeatherForm',
-			openWeatherMap: 'app/api/openWeatherMap.jsx'
-
-	resolve: {
-		root: __dirname,
-		alias: {
+			openWeatherMap: 'app/api/openWeatherMap.jsx',
 			Greeter: 'public/components/Greeter.jsx',
 			GreeterMessage: 'public/components/GreeterMessage.jsx',
 			GreeterForm: 'public/components/GreeterForm.jsx'
@@ -39,5 +34,6 @@ module.exports = {
 				exclude: /(node_modules|bower_components)/
 			}
 		]
-	}
+	},
+	devtool: 'cheap-module-eval-source-map'  //  Sourcemap for debugging bundled javascript files with 'debugger' copmmand
 };

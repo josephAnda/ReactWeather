@@ -1,9 +1,5 @@
 
-
-//  "Presentational Components" don't really render anything, they are 'dummy components'
-//  in that the user ineracts with them and they then run functions.  They are generally not responsible
-//  for maintaining state.  Container components encapsulate the presentational components and maintain state
-//  In short, UI components (that the user updates) should store their data in refs/props that are passed up to
+//  UI components (that the user updates) should store their data in refs/props that are passed up to
 //  container components that can alter their internal state based on this information.  This is (again) the classic
 //  data handling design pattern for ReactJS
 
@@ -21,7 +17,11 @@ var Weather = require('Weather');
 var About = require('About');
 var Examples = require('Examples');
 
-
+//  The code below uses React Roter to integrate React components into the paths required to render
+//  Different parts of a website or app.  The Route tag references paths and their corresponding
+//  Components.  These components are displayed when {this.props.children} is placed somewhere 
+//  Within the root component (in this case, {Main}).  The IndexRoute specifies the 'homepage'
+//  Information that's displayed along with the 'root' compoent.  
 ReactDOM.render(
 	<Router history={hashHistory}>
 		<Route path="/" component={Main}>
