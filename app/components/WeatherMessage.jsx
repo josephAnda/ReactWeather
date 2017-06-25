@@ -1,7 +1,8 @@
 var React = require('react');
 
-var WeatherMessage = (props) => {
-		var {temp, location} = props;
+//  We can use destructuring syntax within the argument to reference attributes of 'props'
+var WeatherMessage = ({temp, location}) => {
+		// var {temp, location} = props;
 		return (
 			<p>It is {temp} in {location}.</p>
 		)
