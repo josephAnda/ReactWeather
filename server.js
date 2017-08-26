@@ -14,15 +14,7 @@ app.use(function (req, res, next) {
 		res.redirect('http://' + req.hostname + req.url);
 	}
 });
-//  app.use() tells what folder we want to serve
-//  express.static() gives the folder name that we want to expose
-app.use(function(req, res, next ) {
-	if (req.headers['x-forwarded-proto'] === 'http') {
-		next();
-	} else {
-		res.redirect('http://' + req.hostname + req.url);
-	}
-});
+
 
 app.use(express.static('public'));
 
