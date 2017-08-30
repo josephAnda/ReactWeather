@@ -1,7 +1,21 @@
+var webpack = require('webpack');
+
 module.exports = {
-	entry: './app/app.jsx', //  Where webpack should start processing the code
-
-
+	entry: [
+		'script!jquery/dist/jquery.min.js',
+		'script!foundation-sites/dist/foundation.min.js',
+		'./app/app.jsx'
+	], //  Where webpack should start processing the code
+	externals: {
+		jquery: 'jQuery'
+	},
+	/plugins: [
+		new webpack.ProvidePlugin({
+			'$': 'jquery',  //  <---Attempt a bug fix here by reffing 'jquery' not 'jQuery'
+			//  Checked out the issue above.  It wasn't the problem but I'm fixing anyway for consistency.
+			'jQuery': 'jquery'
+		})
+	],
 	output: {
 		path: __dirname,  //  Node.js syntax for path to current folder
 		filename: './public/bundle.js'
@@ -21,7 +35,7 @@ module.exports = {
 			GreeterMessage: 'public/components/GreeterMessage.jsx',
 			GreeterForm: 'public/components/GreeterForm.jsx'
 		},
-		extensions: [ "", '.js', '.jsx']  //  This array tells webpack what extensions to process 
+		extensions: [ "", '.js', '.jsx']  //  This array tells webpack what extensions to process
 	},
 	module: {
 		loaders: [  //  loaders are for file types that webpack can't read by default
