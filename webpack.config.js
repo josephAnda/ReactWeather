@@ -9,7 +9,7 @@ module.exports = {
 	externals: {
 		jquery: 'jQuery'
 	},
-	/plugins: [
+	plugins: [
 		new webpack.ProvidePlugin({
 			'$': 'jquery',  //  <---Attempt a bug fix here by reffing 'jquery' not 'jQuery'
 			//  Checked out the issue above.  It wasn't the problem but I'm fixing anyway for consistency.
