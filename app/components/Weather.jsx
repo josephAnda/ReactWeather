@@ -43,19 +43,19 @@ var Weather = React.createClass({
 
 		function renderMessage() {
 			if(isLoading) {
-				return <h3>Fetching weather . . . </h3>;
+				return <p>Fetching weather . . . </p>;
 			} else if (temp && location) {
 				return <WeatherMessage location={location} temp={temp} />;
 			} else if (error) {
-				return <h3>There was an error</h3>;
+				return <p>There was an error</p>;
 			} else {
-				return <p>Enter a city to get the weather</p>
+				return
 			}
 		}
-
+		//  Consider styling further some of these compoents via Foundation
 		return (
 			<div>
-				<h3>Weather Component</h3>
+				<h3 className="text-center">Weather Component</h3>
 				<WeatherForm onSearch={this.handleSearch}/>
 				{renderMessage()}
 			</div>

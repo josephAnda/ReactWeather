@@ -22,7 +22,7 @@ require('style!css!foundation-sites/dist/foundation.min.css');
 //console.log(Foundation, $(document));  //  <--- For debugging the following line
 
 $(document).foundation();
-//  The code below uses React Roter to integrate React components into the paths required to render
+//  The code below uses React Router to integrate React components into the paths required to render
 //  Different parts of a website or app.  The Route tag references paths and their corresponding
 //  Components.  These components are displayed when {this.props.children} is placed somewhere
 //  Within the root component (in this case, {Main}).  The IndexRoute specifies the 'homepage'
