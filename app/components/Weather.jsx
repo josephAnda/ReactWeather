@@ -3,9 +3,9 @@ var WeatherMessage = require('WeatherMessage');
 var WeatherForm = require('WeatherForm');
 var openWeatherMap = require('openWeatherMap');
 
-//  Note that the onSearch prop of WeatherForm is passed to it through the handleSearch property in the 
+//  Note that the onSearch prop of WeatherForm is passed to it through the handleSearch property in the
 //  Weather container component (this component).  This design pattern keeps complexity of functions inside
-//  of the container components and outside of the presentational ones.  
+//  of the container components and outside of the presentational ones.
 var Weather = React.createClass({
 	getInitialState: function() {
 		return {
@@ -17,14 +17,14 @@ var Weather = React.createClass({
 	handleSearch: function(location) {
 		var that = this;
 
-		
+
 		this.setState({isLoading: true});
-		
+
 		openWeatherMap.getTemp(location).then(function (temp) {
 			that.setState({
 				isLoading: false,
 				temp: temp,
-				location: location	
+				location: location
 			});
 		}, function (errorMessage) {
 			alert(errorMessage);
@@ -49,7 +49,7 @@ var Weather = React.createClass({
 			} else if (error) {
 				return <h3>There was an error</h3>;
 			} else {
-				return <h3>Enter a city to get the weather</h3>
+				return <p>Enter a city to get the weather</p>
 			}
 		}
 
