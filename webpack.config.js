@@ -33,7 +33,8 @@ module.exports = {
 			openWeatherMap: 'app/api/openWeatherMap.jsx',
 			Greeter: 'public/components/Greeter.jsx',
 			GreeterMessage: 'public/components/GreeterMessage.jsx',
-			GreeterForm: 'public/components/GreeterForm.jsx'
+			GreeterForm: 'public/components/GreeterForm.jsx',
+			ErrorModal: 'app/components/ErrorModal.jsx'
 		},
 		extensions: [ "", '.js', '.jsx']  //  This array tells webpack what extensions to process
 	},
