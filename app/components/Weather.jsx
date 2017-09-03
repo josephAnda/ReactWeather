@@ -1,6 +1,7 @@
 var React = require('react');
 var WeatherMessage = require('WeatherMessage');
 var WeatherForm = require('WeatherForm');
+var ErrorModal = require('ErrorModal');
 var openWeatherMap = require('openWeatherMap');
 
 //  Note that the onSearch prop of WeatherForm is passed to it through the handleSearch property in the
@@ -10,8 +11,7 @@ var Weather = React.createClass({
 	getInitialState: function() {
 		return {
 			isLoading: false,
-			error: false
-
+			errorMessage: undefined
 		}
 	},
 	handleSearch: function(location) {
@@ -26,38 +26,41 @@ var Weather = React.createClass({
 				temp: temp,
 				location: location
 			});
-		}, function (errorMessage) {
-			alert(errorMessage);
+		}, function(e) {
+
 			that.setState({
 				isLoading: false,
-				location: false,
-				error: true
+				errorMessage: e.message
 			});
 		});
-
 	},
 	render: function() {
 
 		//  ES6 destructuring
-		var {isLoading, temp, location, error} = this.state;
+		var {isLoading, temp, location, errorMessage} = this.state;
 
 		function renderMessage() {
 			if(isLoading) {
 				return <h3 className="text-center">Fetching weather . . . </h3>;
 			} else if (temp && location) {
 				return <WeatherMessage location={location} temp={temp} />;
-			} else if (error) {
-				return <h3 className="text-center">There was an error</h3>
-			} else {
-				return
 			}
 		}
-		//  Consider styling further some of these compoents via Foundation
+
+		function renderError () {
+			if (typeof errorMessage === 'string') {
+				return (
+					<ErrorModal />
+				)
+			}
+		}
+
 		return (
 			<div>
 				<h1 className="text-center">Get Weather</h1>
 				<WeatherForm onSearch={this.handleSearch}/>
 				{renderMessage()}
+				{renderError()}
 			</div>
 		)
 	}
