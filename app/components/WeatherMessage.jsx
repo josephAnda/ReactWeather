@@ -4,7 +4,7 @@ var React = require('react');
 var WeatherMessage = ({temp, location}) => {
 		// var {temp, location} = props;
 		return (
-			<p>It is {temp} in {location}.</p>
+			<h3 className="text-center">It is {temp} in {location}.</h3>
 		)
 	};
 
