@@ -34,7 +34,8 @@ module.exports = {
 			Greeter: 'public/components/Greeter.jsx',
 			GreeterMessage: 'public/components/GreeterMessage.jsx',
 			GreeterForm: 'public/components/GreeterForm.jsx',
-			ErrorModal: 'app/components/ErrorModal.jsx'
+			ErrorModal: 'app/components/ErrorModal.jsx',
+			applicationStyles: 'app/styles/app.css'
 		},
 		extensions: [ "", '.js', '.jsx']  //  This array tells webpack what extensions to process
 	},

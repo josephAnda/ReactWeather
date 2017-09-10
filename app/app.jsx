@@ -21,7 +21,11 @@ var Examples = require('Examples');
 require('style!css!foundation-sites/dist/foundation.min.css');
 //console.log(Foundation, $(document));  //  <--- For debugging the following line
 
+// App css
+
 $(document).foundation();
+require('style!css!applicationStyles');
+
 //  The code below uses React Router to integrate React components into the paths required to render
 //  Different parts of a website or app.  The Route tag references paths and their corresponding
 //  Components.  These components are displayed when {this.props.children} is placed somewhere
