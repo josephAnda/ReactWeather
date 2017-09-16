@@ -24,7 +24,7 @@ require('style!css!foundation-sites/dist/foundation.min.css');
 // App css
 
 $(document).foundation();
-require('style!css!applicationStyles');
+require('style!css!sass!applicationStyles');
 
 //  The code below uses React Router to integrate React components into the paths required to render
 //  Different parts of a website or app.  The Route tag references paths and their corresponding
